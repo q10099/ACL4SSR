@@ -1,0 +1,4 @@
+payload:
+  - '+.fantia.jp'
+  - 'tagxx.vip'
+  - '+.tagss11.pro'
