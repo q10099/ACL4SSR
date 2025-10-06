@@ -1,7 +1,8 @@
 payload:
-  - '+.mega.co.nz'
-  - '+.mega.io'
-  - '+.mega.nz'
-  - '+.mypikpak.com'
-  - '+.pixeldrain.com'
-  - '+.gofile.io'
+  - DOMAIN-SUFFIX,mega.co.nz
+  - DOMAIN-SUFFIX,mega.io
+  - DOMAIN-SUFFIX,mega.nz
+  
+  - DOMAIN-SUFFIX,mypikpak.com
+  - DOMAIN-SUFFIX,pixeldrain.com
+  - DOMAIN-SUFFIX,gofile.io
