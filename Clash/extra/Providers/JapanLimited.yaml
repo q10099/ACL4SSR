@@ -1,3 +1,3 @@
 payload:
-  - '+.dlsite.com'
-  - '+.dlsite.jp'
+  - DOMAIN-SUFFIX,dlsite.com
+  - DOMAIN-SUFFIX,dlsite.jp
