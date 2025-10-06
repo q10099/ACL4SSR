@@ -63,7 +63,7 @@ proxy-groups:
       - DIRECT
   - name: 'Second Proxy'
     type: select
-    use: [TAG_uncommon]
+    use: [provider1, provider2]
   - name: 'Match'
     type: select
     proxies: [DIRECT, 'Proxy']
@@ -75,16 +75,16 @@ proxy-groups:
   - {name: 'Google FCM', type: select, proxies: [DIRECT, 'Proxy']}
   - {name: 'Microsoft', type: select, proxies: [DIRECT, 'Proxy']}
   - {name: 'Apple', type: select, proxies: [DIRECT, 'Proxy']}
-  - {name: '🇭🇰 HK-A', type: select, use: [TAG], filter: '(?:香港|HK|Hong Kong)'}
-  - {name: '🇭🇰 HK-B', type: select, use: [TAG], filter: '(?:香港|HK|Hong Kong)'}
-  - {name: '🇹🇼 TW-A', type: select, use: [TAG], filter: '(?:台湾|TW|Taiwan|台北|新北|彰化)'}
-  - {name: '🇹🇼 TW-B', type: select, use: [TAG], filter: '(?:台湾|TW|Taiwan|台北|新北|彰化)'}
-  - {name: '🇯🇵 JP-A', type: select, use: [TAG], filter: '(?:日本|JP|Japan|日本|川日|东京|大阪|泉日|埼玉|沪日|深日)'}
-  - {name: '🇯🇵 JP-B', type: select, use: [TAG], filter: '(?:日本|JP|Japan|日本|川日|东京|大阪|泉日|埼玉|沪日|深日)'}
-  - {name: '🇺🇸 US-A', type: select, use: [TAG], filter: '(?:美国|US|United States|洛杉矶|圣何塞|纽约|旧金山|西雅图|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|圣克拉拉)'}
-  - {name: '🇺🇸 US-B', type: select, use: [TAG], filter: '(?:美国|US|United States|洛杉矶|圣何塞|纽约|旧金山|西雅图|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|圣克拉拉)'}
-  - {name: '🇸🇬 SG-A', type: select, use: [TAG], filter: '(?:新加坡|SG|Singapore|狮城)'}
-  - {name: '🇸🇬 SG-B', type: select, use: [TAG], filter: '(?:新加坡|SG|Singapore|狮城)'}
+  - {name: '🇭🇰 HK-A', type: select, use: [provider1, provider2], filter: '(?:香港|HK|Hong Kong)'}
+  - {name: '🇭🇰 HK-B', type: select, use: [provider1, provider2], filter: '(?:香港|HK|Hong Kong)'}
+  - {name: '🇹🇼 TW-A', type: select, use: [provider1, provider2], filter: '(?:台湾|TW|Taiwan|台北|新北|彰化)'}
+  - {name: '🇹🇼 TW-B', type: select, use: [provider1, provider2], filter: '(?:台湾|TW|Taiwan|台北|新北|彰化)'}
+  - {name: '🇯🇵 JP-A', type: select, use: [provider1, provider2], filter: '(?:日本|JP|Japan|日本|川日|东京|大阪|泉日|埼玉|沪日|深日)'}
+  - {name: '🇯🇵 JP-B', type: select, use: [provider1, provider2], filter: '(?:日本|JP|Japan|日本|川日|东京|大阪|泉日|埼玉|沪日|深日)'}
+  - {name: '🇺🇸 US-A', type: select, use: [provider1, provider2], filter: '(?:美国|US|United States|洛杉矶|圣何塞|纽约|旧金山|西雅图|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|圣克拉拉)'}
+  - {name: '🇺🇸 US-B', type: select, use: [provider1, provider2], filter: '(?:美国|US|United States|洛杉矶|圣何塞|纽约|旧金山|西雅图|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|圣克拉拉)'}
+  - {name: '🇸🇬 SG-A', type: select, use: [provider1, provider2], filter: '(?:新加坡|SG|Singapore|狮城)'}
+  - {name: '🇸🇬 SG-B', type: select, use: [provider1, provider2], filter: '(?:新加坡|SG|Singapore|狮城)'}
 
 rules:
   - RULE-SET,LocalAreaNetwork,DIRECT
