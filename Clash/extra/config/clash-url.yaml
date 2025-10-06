@@ -1,0 +1,267 @@
+# this is clash config yaml, don't show your proxy token in public repo, you can put it on private server or gist.
+# 注意，这是clash的配置文件，它包含订阅token，不要将其放在公共仓库中，可本地使用，若要托管请使用私人服务器或者gist等安全链。
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: warning
+external-controller: '127.0.0.1:9090'
+cfw-bypass:
+    - localhost
+    - '127.*'
+    - '10.*'
+    - '172.16.*'
+    - '172.17.*'
+    - '172.18.*'
+    - '172.19.*'
+    - '172.20.*'
+    - '172.21.*'
+    - '172.22.*'
+    - '172.23.*'
+    - '172.24.*'
+    - '172.25.*'
+    - '172.26.*'
+    - '172.27.*'
+    - '172.28.*'
+    - '172.29.*'
+    - '172.30.*'
+    - '172.31.*'
+    - '192.168.*'
+    - '<local>'
+
+proxy-providers:
+  provider1:
+    type: http
+    path: ./providers/provider1.yaml
+    url: "Your proxy-provider's url, it is not need subconverter, you can custom your rules and groups"
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+    filter: '(?:香港|HK|Hong Kong|台湾|TW|Taiwan|台北|新北|彰化|日本|JP|Japan|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|新加坡|SG|Singapore|狮城|美国|US|United States|洛杉矶|圣何塞|纽约|旧金山|西雅图|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|圣克拉拉)'
+  provider2:
+    type: http
+    path: ./providers/provider2.yaml
+    url: "..."
+    interval: 604800
+    
+proxy-groups:
+  - name: 'Proxy'
+    type: select
+    proxies:
+      - '🇭🇰 HK-A'
+      - '🇭🇰 HK-B'
+      - '🇹🇼 TW-A'
+      - '🇹🇼 TW-B'
+      - '🇯🇵 JP-A'
+      - '🇯🇵 JP-B'
+      - '🇺🇸 US-A'
+      - '🇺🇸 US-B'
+      - '🇸🇬 SG-A'
+      - '🇸🇬 SG-B'
+      - 'Second Proxy'
+      - DIRECT
+  - name: 'Second Proxy'
+    type: select
+    use: [TAG_uncommon]
+  - name: 'Match'
+    type: select
+    proxies: [DIRECT, 'Proxy']
+  - {name: 'AI', type: select, proxies: ['Proxy', DIRECT, '🇯🇵 JP-A', '🇯🇵 JP-B', '🇺🇸 US-A', '🇺🇸 US-B', '🇸🇬 SG-A', '🇸🇬 SG-B']}
+  - {name: 'Telegram', type: select, proxies: ['Proxy', DIRECT, '🇭🇰 HK-A', '🇭🇰 HK-B', '🇹🇼 TW-A', '🇹🇼 TW-B', '🇯🇵 JP-A', '🇯🇵 JP-B', '🇺🇸 US-A', '🇺🇸 US-B', '🇸🇬 SG-A', '🇸🇬 SG-B']}
+  # - {name: 'Streaming Media', type: select, proxies: ['Proxy', DIRECT, '🇭🇰 HK-A', '🇭🇰 HK-B', '🇹🇼 TW-A', '🇹🇼 TW-B', '🇯🇵 JP-A', '🇯🇵 JP-B', '🇺🇸 US-A', '🇺🇸 US-B', '🇸🇬 SG-A', '🇸🇬 SG-B']}
+  # - {name: 'Traffic Quota', type: select, proxies: ['Proxy', DIRECT], use: [TAG]}
+  - {name: 'Game Platform', type: select, proxies: ['Proxy', DIRECT, '🇭🇰 HK-A', '🇭🇰 HK-B', '🇯🇵 JP-A', '🇯🇵 JP-B', '🇺🇸 US-A', '🇺🇸 US-B']}
+  - {name: 'Google FCM', type: select, proxies: [DIRECT, 'Proxy']}
+  - {name: 'Microsoft', type: select, proxies: [DIRECT, 'Proxy']}
+  - {name: 'Apple', type: select, proxies: [DIRECT, 'Proxy']}
+  - {name: '🇭🇰 HK-A', type: select, use: [TAG], filter: '(?:香港|HK|Hong Kong)'}
+  - {name: '🇭🇰 HK-B', type: select, use: [TAG], filter: '(?:香港|HK|Hong Kong)'}
+  - {name: '🇹🇼 TW-A', type: select, use: [TAG], filter: '(?:台湾|TW|Taiwan|台北|新北|彰化)'}
+  - {name: '🇹🇼 TW-B', type: select, use: [TAG], filter: '(?:台湾|TW|Taiwan|台北|新北|彰化)'}
+  - {name: '🇯🇵 JP-A', type: select, use: [TAG], filter: '(?:日本|JP|Japan|日本|川日|东京|大阪|泉日|埼玉|沪日|深日)'}
+  - {name: '🇯🇵 JP-B', type: select, use: [TAG], filter: '(?:日本|JP|Japan|日本|川日|东京|大阪|泉日|埼玉|沪日|深日)'}
+  - {name: '🇺🇸 US-A', type: select, use: [TAG], filter: '(?:美国|US|United States|洛杉矶|圣何塞|纽约|旧金山|西雅图|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|圣克拉拉)'}
+  - {name: '🇺🇸 US-B', type: select, use: [TAG], filter: '(?:美国|US|United States|洛杉矶|圣何塞|纽约|旧金山|西雅图|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|圣克拉拉)'}
+  - {name: '🇸🇬 SG-A', type: select, use: [TAG], filter: '(?:新加坡|SG|Singapore|狮城)'}
+  - {name: '🇸🇬 SG-B', type: select, use: [TAG], filter: '(?:新加坡|SG|Singapore|狮城)'}
+
+rules:
+  - RULE-SET,LocalAreaNetwork,DIRECT
+  - RULE-SET,GoogleFCM,Google FCM
+  - RULE-SET,AI,AI
+  - RULE-SET,OpenAi,AI
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Netflix,Streaming Media
+  - RULE-SET,Spotify,Streaming Media
+  - RULE-SET,Microsoft,Microsoft
+  - RULE-SET,Apple,Apple
+  - RULE-SET,SteamCN,DIRECT
+  - RULE-SET,Steam,Game Platform
+  - RULE-SET,Sony,Game Platform
+  - RULE-SET,Nintendo,Game Platform
+  - RULE-SET,Origin,Game Platform
+  - RULE-SET,Epic,Game Platform
+  # - RULE-SET,TrafficQuota,Traffic Quota
+  # - RULE-SET,Direct0,DIRECT
+  # - RULE-SET,JapanLimited,🇯🇵 JP-A
+  # - RULE-SET,USLimited,🇺🇸 US-A
+  # - RULE-SET,Proxy0,Proxy
+  - RULE-SET,Direct,DIRECT
+  - RULE-SET,GFW,Proxy
+  - RULE-SET,Reject,REJECT
+  - RULE-SET,Download,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Match
+
+rule-providers:
+  # https://github.com/ACL4SSR/ACL4SSR
+  LocalAreaNetwork:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml"
+    path: ./providers/LocalAreaNetwork.yaml
+    interval: 604800
+  Download:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Download.yaml"
+    path: ./providers/Download.yaml
+    interval: 604800
+  GoogleFCM:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml"
+    path: ./providers/GoogleFCM.yaml
+    interval: 604800
+  Apple:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Apple.yaml"
+    path: ./providers/Apple.yaml
+    interval: 604800
+  Microsoft:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml"
+    path: ./providers/Microsoft.yaml
+    interval: 604800
+  Telegram:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml"
+    path: ./providers/Telegram.yaml
+    interval: 604800
+  AI:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/AI.yaml"
+    path: ./providers/AI.yaml
+    interval: 604800
+  OpenAi:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/OpenAi.yaml"
+    path: ./providers/OpenAi.yaml
+    interval: 604800
+  SteamCN:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/SteamCN.yaml"
+    path: ./providers/SteamCN.yaml
+    interval: 604800
+  Steam:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml"
+    path: ./providers/Steam.yaml
+    interval: 604800
+  Sony:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
+    path: ./providers/Sony.yaml
+    interval: 604800
+  Nintendo:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Nintendo.yaml"
+    path: ./providers/Nintendo.yaml
+    interval: 604800
+  Origin:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Origin.yaml"
+    path: ./providers/Origin.yaml
+    interval: 604800
+  Epic:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Epic.yaml"
+    path: ./providers/Epic.yaml
+    interval: 604800
+  Netflix:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Netflix.yaml"
+    path: ./providers/Netflix.yaml
+    interval: 604800
+  Spotify:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Spotify.yaml"
+    path: ./providers/Spotify.yaml
+    interval: 604800
+  
+  # https://github.com/Loyalsoldier/clash-rules
+  Direct:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt"
+    path: ./providers/Direct.yaml
+    interval: 604800
+  GFW:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt"
+    path: ./providers/GFW.yaml
+    interval: 604800
+  Reject:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
+    path: ./providers/Reject.yaml
+    interval: 604800
+
+  # personal rule-set example
+  # 
+  # Direct0:
+  #   type: http
+  #   behavior: classical
+  #   url: https://raw.githubusercontent.com/q10099/ACL4SSR/master/Clash/extra/Providers/Direct.yaml
+  #   path: ./providers/Direct0.yaml
+  #   interval: 86400
+  # Proxy0:
+  #   type: http
+  #   behavior: classical
+  #   url: https://raw.githubusercontent.com/q10099/ACL4SSR/master/Clash/extra/Providers/Proxy.yaml
+  #   path: ./providers/Proxy0.yaml
+  #   interval: 86400
+  # TrafficQuota:
+  #   type: http
+  #   behavior: classical
+  #   url: "https://raw.githubusercontent.com/q10099/ACL4SSR/master/Clash/extra/Providers/TrafficQuota.yaml"
+  #   path: ./providers/TrafficQuota.yaml
+  #   interval: 86400
+  # JapanLimited:
+  #   type: http
+  #   behavior: classical
+  #   url: "https://raw.githubusercontent.com/q10099/ACL4SSR/master/Clash/extra/Providers/JapanLimited.yaml"
+  #   path: ./providers/JapanLimited.yaml
+  #   interval: 86400
+  # USLimited:
+  #   type: http
+  #   behavior: classical
+  #   url: "https://raw.githubusercontent.com/q10099/ACL4SSR/master/Clash/extra/Providers/USLimited.yaml"
+  #   path: ./providers/USLimited.yaml
+  #   interval: 86400
